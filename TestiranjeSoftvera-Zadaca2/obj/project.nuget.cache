@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "LtmLBUKidFDK7i1QYJUDbHKNNV6oHEbWewboU0+adoahefgnwO8KOkuqfMKtf03Dd1TYidUyGb23I4ovckPKxA==",
+  "dgSpecHash": "5bL57yc4NLxbo+eTWZiH4CyAQ0OgOIUEHSPwkfUuJke5DyAW+3bNfsU/2tAwYXJqTvvIycghxV7artSrjuXyaw==",
   "success": true,
   "projectFilePath": "C:\\Users\\fatal\\OneDrive\\Desktop\\ETF-RS-1-GODINA-1-SEMESTAR\\3. Semestar\\TS\\Zadace\\Zadaca2\\TestiranjeSoftvera-Zadaca2\\TestiranjeSoftvera-Zadaca2.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\fatal\\.nuget\\packages\\mstest.testadapter\\2.2.7\\mstest.testadapter.2.2.7.nupkg.sha512"
+  ],
   "logs": []
 }
