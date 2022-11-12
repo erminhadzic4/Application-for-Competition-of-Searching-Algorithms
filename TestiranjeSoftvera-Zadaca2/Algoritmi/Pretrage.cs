@@ -203,32 +203,6 @@ namespace TestiranjeSoftvera_Zadaca2.Algoritmi
             return niz.IndexOf(element);
         }
 
-        //Interpolacijska pretraga (Interpolation search)
-        //Vremenska kompleksnost: O(log2(log2 n))
-        public static int interpolacijskaPretraga(IList<int> niz, int element)
-        {
-            int min = 0, max = niz.Count() - 1;
-
-            while (min <= max && element >= niz[min] && element <= niz[max])
-            {
-                if (min == max)
-                {
-                    if (niz[min] == element) return min;
-                    return -1;
-                }
-
-                int pos = (int)(min + (((double)(max - min) / (niz[max] - niz[min])) * (element - niz[min])));
-
-                if (niz[pos] == element)
-                    return pos;
-                if (niz[pos] < element)
-                    min = pos + 1;
-                else
-                    max = pos - 1;
-            }
-            return -1;
-        }
-
         //test metoda
         public static IList<Osoba> vratiSortirano(IList<Osoba> niz)
         {
@@ -364,7 +338,7 @@ namespace TestiranjeSoftvera_Zadaca2.Algoritmi
             return pomocna(niz2, i / 2, Math.Min(i, n - 1), trazeniElement);
         }
 
-        static int pomocna<T>(IList<T> niz, int lijevo, int desno, T element) where T : IComparable<T>
+        public static int pomocna<T>(IList<T> niz, int lijevo, int desno, T element) where T : IComparable<T>
         {
             if (desno >= lijevo)
             {
@@ -395,7 +369,7 @@ namespace TestiranjeSoftvera_Zadaca2.Algoritmi
             return pomocnaZaTernarnu<T>(niz, trazeniElement, 0, niz.Count());
         }
 
-        static int pomocnaZaTernarnu<T>(IList<T> niz, T trazeniElement, int pocetak, int kraj) where T : IComparable<T>
+        public static int pomocnaZaTernarnu<T>(IList<T> niz, T trazeniElement, int pocetak, int kraj) where T : IComparable<T>
         {
             if (niz.Count() >= 0)
             {
@@ -435,7 +409,7 @@ namespace TestiranjeSoftvera_Zadaca2.Algoritmi
             return pomocnaZaTernarnu(niz2, trazeniElement, 0, niz2.Count());
         }
 
-        static int pomocnaZaTernarnu(IList<Osoba> niz, Osoba trazeniElement, int pocetak, int kraj)
+        public static int pomocnaZaTernarnu(IList<Osoba> niz, Osoba trazeniElement, int pocetak, int kraj)
         {
             if (niz.Count() >= 0)
             {

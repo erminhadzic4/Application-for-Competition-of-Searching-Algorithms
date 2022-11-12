@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tests>
+	<osoba>
+		<Ime>Meho</Ime>
+		<Prezime>Mehic</Prezime>
+		<Visina>175</Visina>
+		<Tezina>70</Tezina>
+		<JMBG>12345</JMBG>
+		<DatumRodenja>3.3.2002</DatumRodenja>
+	</osoba>
+	<osoba>
+		<Ime>Pero</Ime>
+		<Prezime>Peric</Prezime>
+		<Visina>182</Visina>
+		<Tezina>91</Tezina>
+		<JMBG>123456</JMBG>
+		<DatumRodenja>6.4.1999</DatumRodenja>
+	</osoba>
+	<osoba>
+		<Ime>Stipe</Ime>
+		<Prezime>Stipic</Prezime>
+		<Visina>190</Visina>
+		<Tezina>88</Tezina>
+		<JMBG>9999999</JMBG>
+		<DatumRodenja>8.1.1989</DatumRodenja>
+	</osoba>
+</tests>

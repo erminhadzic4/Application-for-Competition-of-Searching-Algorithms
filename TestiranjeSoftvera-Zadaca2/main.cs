@@ -21,7 +21,7 @@ namespace Zadaca2
         Ispis ce se samo vrsiti na konzolu. */
         const bool ZAPISI_U_DATOTEKU = true;
 
-        static void Main(string[] args)
+        public static void Main()
         {
 
             /* Postavlja sirinu dovoljnu za ispis informacija, jer ne mora znaciti da su svima iste dimenzije */
@@ -32,14 +32,10 @@ namespace Zadaca2
             switch (odgovor)
             {
                 case "1":
-                    Console.WriteLine("Odabir pretrage");
                     KorisnickaPretraga();
-                    Console.ReadLine();
                     break;
                 case "2":
-                    Console.WriteLine("Odabir takmicenja");
                     TakmicenjeAlgoritama();
-                    Console.ReadLine();
                     break;
                 default:
                     return;
@@ -52,10 +48,12 @@ namespace Zadaca2
             List<List<Tuple<string, TimeSpan, int, string, string, string>>> rezultati2 = ListingKomparacijeOsoba(1000);
             List<List<Tuple<string, TimeSpan, int, string, string, string>>> rezultati3 = ListingKomparacijeOsoba(10000);
 
-            var ukupni_rezultati = new List<List<List<Tuple<string, TimeSpan, int, string, string, string>>>>();
-            ukupni_rezultati.Add(rezultati1);
-            ukupni_rezultati.Add(rezultati2);
-            ukupni_rezultati.Add(rezultati3);
+            var ukupni_rezultati = new List<List<List<Tuple<string, TimeSpan, int, string, string, string>>>>
+            {
+                rezultati1,
+                rezultati2,
+                rezultati3
+            };
 
             /* Beskonacna petlja za pomjeranje listinga algoritama, pritiskom na ESC program zavrsava sa radom. */
             int i = 0;
@@ -72,9 +70,8 @@ namespace Zadaca2
             }
         }
 
-        static void KorisnickaPretraga()
+        public static void KorisnickaPretraga()
         {
-
             Console.Clear();
             Console.WriteLine("{0,-30} {1,5}\n", "Naziv algoritma", "Unesite:");
             Console.WriteLine("{0,-30} {1,5}", "Iscrpna pretraga", "1");
@@ -203,13 +200,13 @@ namespace Zadaca2
             }
         }
 
-        static void IspisiOsobu(Osoba osoba, int index)
+        public static void IspisiOsobu(Osoba osoba, int index)
         {
             Console.WriteLine("{0, -15} {1, -20} {2, -20} {3, -20} {4, -20} {5, -20}\n", "Ime osobe", "Prezime osobe", "Visina osobe", "Tezina osobe", "Datum rodjenja", "Na indexu");
             Console.WriteLine("{0, -15} {1, -20} {2, -20} {3, -20} {4, -20} {5, -20}", osoba.ime, osoba.prezime, osoba.visina, osoba.tezina, osoba.datum_rodenja.ToShortDateString(), index);
         }
 
-        static void OdradiZaNiz(Func<IList<Osoba>, Osoba, int> fja)
+        public static void OdradiZaNiz(Func<IList<Osoba>, Osoba, int> fja)
         {
             Console.Clear();
             Console.Write("Broj osoba :");
@@ -263,7 +260,7 @@ namespace Zadaca2
 
         }
 
-        static void OdradiZaListu(Func<IList<Osoba>, Osoba, int> fja)
+        public static void OdradiZaListu(Func<IList<Osoba>, Osoba, int> fja)
         {
             Console.Clear();
             Console.Write("Broj osoba: ");
@@ -322,7 +319,7 @@ namespace Zadaca2
         }
 
         /* Metoda zapisuje sve iteracije algoritama u file */
-        static void ZapisiSveUFile(List<List<List<Tuple<string, TimeSpan, int, int, string, string>>>> ukupni_rezultati)
+        public static void ZapisiSveUFile(List<List<List<Tuple<string, TimeSpan, int, int, string, string>>>> ukupni_rezultati)
         {
             if (File.Exists("algoritmi_informacije.txt"))
             {
@@ -335,7 +332,7 @@ namespace Zadaca2
         }
 
         /* Metoda ispisuje sve iteracije na konzolu */
-        static void IspisiListing(List<List<Tuple<string, TimeSpan, int, int, string, string>>> rezultati)
+        public static void IspisiListing(List<List<Tuple<string, TimeSpan, int, int, string, string>>> rezultati)
         {
 
             /* Prolazi kroz sve rezultate i sortira ih po vremenu izvrsenja - rastući poredak */
@@ -357,7 +354,7 @@ namespace Zadaca2
         }
 
         /* Glavna metoda, u kojoj se najveci dio posla obavlja */
-        static List<List<Tuple<string, TimeSpan, int, int, string, string>>> ListingKomparacije(int pocetak, int kraj, bool testListeIliNiza)
+        public static List<List<Tuple<string, TimeSpan, int, int, string, string>>> ListingKomparacije(int pocetak, int kraj, bool testListeIliNiza)
         {
             Random random = new Random();
             List<List<Tuple<string, TimeSpan, int, int, string, string>>> iteracija = new List<List<Tuple<string, TimeSpan, int, int, string, string>>>();
@@ -389,7 +386,7 @@ namespace Zadaca2
         }
 
         /* Pomocna metoda za popunjavanje niza elementima */
-        static int[] DajNiz(int pocetak, int kraj)
+        public static int[] DajNiz(int pocetak, int kraj)
         {
             int[] niz = new int[Math.Abs(kraj - pocetak + 1)];
             for (int i = 0; i < niz.Count(); i++)
@@ -401,7 +398,7 @@ namespace Zadaca2
         }
 
         /* Pomocna metoda za popunjavanje liste elementima */
-        static List<int> DajListu(int pocetak, int kraj)
+        public static List<int> DajListu(int pocetak, int kraj)
         {
             List<int> lista = new List<int>(Math.Abs(kraj - pocetak));
             for (int i = pocetak; i <= kraj; i++)
@@ -410,7 +407,7 @@ namespace Zadaca2
         }
 
         /* Metoda vrsi komparaciju algoritama pozivajuci IzvrsiPretragu koja pored ostalog prima funkciju kao parametar */
-        static List<Tuple<string, TimeSpan, int, int, string, string>> ZapocniKomparaciju(int pocetak, int kraj, int element, bool testListeIliNiza)
+        public static List<Tuple<string, TimeSpan, int, int, string, string>> ZapocniKomparaciju(int pocetak, int kraj, int element, bool testListeIliNiza)
         {
             List<Tuple<string, TimeSpan, int, int, string, string>> lista = new List<Tuple<string, TimeSpan, int, int, string, string>>(0);
 
@@ -426,7 +423,7 @@ namespace Zadaca2
         }
 
         /* Jedino za naglasiti je to da funkcija prima kao parametar funkciju koja ima dva parametra, listu intova, int i vraca int. */
-        static Tuple<string, TimeSpan, int, int, string, string> IzvrsiPretragu(Func<IList<int>, int, int> fja, int pocetak, int kraj, int element, string ime, bool testListeIliNiza)
+        public static Tuple<string, TimeSpan, int, int, string, string> IzvrsiPretragu(Func<IList<int>, int, int> fja, int pocetak, int kraj, int element, string ime, bool testListeIliNiza)
         {
             List<int> lista = DajListu(pocetak, kraj);
             int[] niz = DajNiz(pocetak, kraj);
@@ -451,7 +448,7 @@ namespace Zadaca2
 
         /* Metoda koja zapisuje jednu iteraciju (jedan opseg vrijednosti) algoritama u file. Zbog cisceg koda, koristi se u metodi koja zapisuje sve iteracije u file. 
         Koristi se StreamWriter kao klasa pomocu koje smo ostvarili pisanje u file. Pored nje se mogla koristiti i File klasa. */
-        static void ZapisiUFile(List<List<Tuple<string, TimeSpan, int, int, string, string>>> rezultati)
+        public static void ZapisiUFile(List<List<Tuple<string, TimeSpan, int, int, string, string>>> rezultati)
         {
             using (StreamWriter sw = File.AppendText("algoritmi_informacije.txt"))
             {
@@ -475,16 +472,9 @@ namespace Zadaca2
             }
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///
+
         /* Glavna metoda, u kojoj se najveci dio posla obavlja */
-        static List<List<Tuple<string, TimeSpan, int, string, string, string>>> ListingKomparacijeOsoba(int velicina) //u svim funkcijama u je trazeni element bio int, promijenio sam u string da vrati ime
+        public static List<List<Tuple<string, TimeSpan, int, string, string, string>>> ListingKomparacijeOsoba(int velicina) //u svim funkcijama u je trazeni element bio int, promijenio sam u string da vrati ime
         {
             Random random = new Random();
             List<List<Tuple<string, TimeSpan, int, string, string, string>>> iteracija = new List<List<Tuple<string, TimeSpan, int, string, string, string>>>();
@@ -506,7 +496,7 @@ namespace Zadaca2
         }
 
         /* Metoda vrsi komparaciju algoritama pozivajuci IzvrsiPretragu koja pored ostalog prima funkciju kao parametar */
-        static List<Tuple<string, TimeSpan, int, string, string, string>> ZapocniKomparacijuOsoba(List<Osoba> listaOsoba, int velicina, Osoba element)
+        public static List<Tuple<string, TimeSpan, int, string, string, string>> ZapocniKomparacijuOsoba(List<Osoba> listaOsoba, int velicina, Osoba element)
         {
             List<Tuple<string, TimeSpan, int, string, string, string>> lista = new List<Tuple<string, TimeSpan, int, string, string, string>>(0);
 
@@ -523,7 +513,7 @@ namespace Zadaca2
             return lista;
         }
 
-        static Tuple<string, TimeSpan, int, string, string, string> IzvrsiPretraguOsoba(Func<IList<Osoba>, Osoba, int> fja, List<Osoba> listaOsoba, int velicina, Osoba element, string ime)
+        public static Tuple<string, TimeSpan, int, string, string, string> IzvrsiPretraguOsoba(Func<IList<Osoba>, Osoba, int> fja, List<Osoba> listaOsoba, int velicina, Osoba element, string ime)
         {
             int vrijednost;
             string koristeni_kontejner = "Lista";
@@ -536,7 +526,7 @@ namespace Zadaca2
             return new Tuple<string, TimeSpan, int, string, string, string>(ime, sw.Elapsed, vrijednost, listaOsoba[listaOsoba.IndexOf(element)].ime, koristeni_kontejner, "[" + 0 + ", " + velicina + "]");
         }
 
-        static List<Osoba> DajListuOsoba(int velicina)
+        public static List<Osoba> DajListuOsoba(int velicina)
         {
             Random rand = new Random();
             List<Osoba> lista = new List<Osoba>();
@@ -547,7 +537,7 @@ namespace Zadaca2
             }
             return lista;
         }
-        static void IspisiListingOsoba(List<List<Tuple<string, TimeSpan, int, string, string, string>>> rezultati)
+        public static void IspisiListingOsoba(List<List<Tuple<string, TimeSpan, int, string, string, string>>> rezultati)
         {
             for (int i = 0; i < rezultati.Count(); i++)
             {
