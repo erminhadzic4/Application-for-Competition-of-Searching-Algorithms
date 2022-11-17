@@ -19,7 +19,7 @@ namespace Zadaca2
         /* Ukoliko je ova konstanta stavljena na true, sve informacija koje se zapisuju na konzolu ce takoder biti
         Zapisane i u .txt file koji ce se nalaziti pored .exe file-a samog projekta. Ukoliko je stavljen na false
         Ispis ce se samo vrsiti na konzolu. */
-        const bool ZAPISI_U_DATOTEKU = true;
+        const bool ZAPISI_U_DATOTEKU = false;
 
         public static void Main()
         {
@@ -42,7 +42,7 @@ namespace Zadaca2
             }
         }
 
-        static void TakmicenjeAlgoritama()
+        public static void TakmicenjeAlgoritama()
         {
             List<List<Tuple<string, TimeSpan, int, string, string, string>>> rezultati1 = ListingKomparacijeOsoba(100);
             List<List<Tuple<string, TimeSpan, int, string, string, string>>> rezultati2 = ListingKomparacijeOsoba(1000);
@@ -414,7 +414,6 @@ namespace Zadaca2
             lista.Add(IzvrsiPretragu(Pretrage.iscrpnaPretraga<int>, pocetak, kraj, element, "Iscrpna pretraga", testListeIliNiza));
             lista.Add(IzvrsiPretragu(Pretrage.fibonaciPretraga<int>, pocetak, kraj, element, "Fibonacci pretraga", testListeIliNiza));
             lista.Add(IzvrsiPretragu(Pretrage.binarnaPretraga<int>, pocetak, kraj, element, "Binarna pretraga", testListeIliNiza));
-            //lista.Add(IzvrsiPretragu(Pretrage.interpolacijskaPretraga, pocetak, kraj, element, "Interpolacijska pretraga", testListeIliNiza));
             lista.Add(IzvrsiPretragu(Pretrage.skokPretraga<int>, pocetak, kraj, element, "Skok pretraga", testListeIliNiza));
             lista.Add(IzvrsiPretragu(Pretrage.eksponencijalnaPretraga<int>, pocetak, kraj, element, "Eksponencijalna pretraga", testListeIliNiza));
             lista.Add(IzvrsiPretragu(Pretrage.rekurzivnaBinarnaPretraga<int>, pocetak, kraj, element, "Rekurzivna binarna pretraga", testListeIliNiza));
@@ -474,23 +473,19 @@ namespace Zadaca2
 
 
         /* Glavna metoda, u kojoj se najveci dio posla obavlja */
-        public static List<List<Tuple<string, TimeSpan, int, string, string, string>>> ListingKomparacijeOsoba(int velicina) //u svim funkcijama u je trazeni element bio int, promijenio sam u string da vrati ime
+        public static List<List<Tuple<string, TimeSpan, int, string, string, string>>> ListingKomparacijeOsoba(int velicina) 
         {
             Random random = new Random();
             List<List<Tuple<string, TimeSpan, int, string, string, string>>> iteracija = new List<List<Tuple<string, TimeSpan, int, string, string, string>>>();
 
             List<Osoba> listaOsoba = DajListuOsoba(velicina); //kreira listu random osoba
-            //U zapocniKomparaciju sam dodao da se salje i kreirana lista
 
             List<Tuple<string, TimeSpan, int, string, string, string>> rezultatiLista1 = ZapocniKomparacijuOsoba(listaOsoba, velicina, listaOsoba[0]); //pretraga pocetka
             List<Tuple<string, TimeSpan, int, string, string, string>> rezultatiLista2 = ZapocniKomparacijuOsoba(listaOsoba, velicina, listaOsoba[velicina / 2]); //pretraga sredine
             List<Tuple<string, TimeSpan, int, string, string, string>> rezultatiLista3 = ZapocniKomparacijuOsoba(listaOsoba, velicina, listaOsoba[velicina]); //pretraga kraja
-            /* Osoba nepostojeca = new Osoba("ermin", "floki", 1, 1, 1525781, new DateTime(1999, 12, 15)); //nepostojeci jer je JMBG sedam cifri
-              List<Tuple<string, TimeSpan, int, string, string, string>> rezultatiLista4 = ZapocniKomparacijuOsoba(listaOsoba, velicina, nepostojeca);*/ //pretraga nepostojeceg elementa //ovo je pojebano baca exception
             iteracija.Add(rezultatiLista1);
             iteracija.Add(rezultatiLista2);
             iteracija.Add(rezultatiLista3);
-            /*iteracija.Add(rezultatiLista4);*/
 
             return iteracija;
         }
